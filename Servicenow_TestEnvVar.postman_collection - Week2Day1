@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "10f715d1-75af-466b-8a48-d5d0f5cd22f9",
+		"name": "Servicenow_TestEnvVar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25441299"
+	},
+	"item": [
+		{
+			"name": "CreateNewChangeRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"CreateNewChangeRequest\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"//pm.test(\"DescriptionCheck\", function () {\r",
+							"    //pm.expect(pm.response.text()).to.include(\"Create new desc with chaining1\");\r",
+							"//});\r",
+							"\r",
+							"// Save response in Test Tab\r",
+							"var res=pm.response.json();\r",
+							"console.log(res.result.sys_id)\r",
+							"var SystemID = res.result.sys_id;\r",
+							"pm.globals.set(\"sys_id\",SystemID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"{{desc}}\",\r\n    \"short_description\": \"{{short desc}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/now/table/{{RequestType}}?sysparm_fields=number,description,review_status,sys_id,test_plan",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{RequestType}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "number,description,review_status,sys_id,test_plan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateChangeRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"StatusCodeCheck\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//pm.test(\"UpdateCheck\", function () {\r",
+							"    //pm.expect(pm.response.text()).to.include(\"Update new CR with Postman\");\r",
+							"//});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"{{desc}}\",\r\n    \"test_plan\":\"{{short desc}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/api/now/table/{{RequestType}}/{{sys_id}}?sysparm_fields=number,description,review_status,sys_id,test_plan",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{RequestType}}",
+						"{{sys_id}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "number,description,review_status,sys_id,test_plan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteChangeRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"AssertDeleteStatusCode\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/api/now/table/{{RequestType}}/{{sys_id}}?sysparm_fields=number,description,review_status,sys_id,test_plan",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{RequestType}}",
+						"{{sys_id}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "number,description,review_status,sys_id,test_plan"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "HMGnm$/5Xgw2",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "RequestType",
+			"value": "change_request",
+			"type": "string"
+		}
+	]
+}
