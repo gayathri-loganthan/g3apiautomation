@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="StepDefinitions.PutCR">
+        <methods>
+          <include name="After_Method"/>
+          <include name="Put_CR"/>
+          <include name="BeforeMethod"/>
+        </methods>
+      </class> <!-- StepDefinitions.PutCR -->
+      <class name="StepDefinitions.PostCR">
+        <methods>
+          <include name="Post_CR"/>
+          <include name="After_Method"/>
+          <include name="BeforeMethod"/>
+        </methods>
+      </class> <!-- StepDefinitions.PostCR -->
+      <class name="StepDefinitions.PatchCR">
+        <methods>
+          <include name="After_Method"/>
+          <include name="Patch_CR"/>
+          <include name="BeforeMethod"/>
+        </methods>
+      </class> <!-- StepDefinitions.PatchCR -->
+      <class name="StepDefinitions.DeleteCR">
+        <methods>
+          <include name="After_Method"/>
+          <include name="Delete_CR"/>
+          <include name="BeforeMethod"/>
+        </methods>
+      </class> <!-- StepDefinitions.DeleteCR -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
